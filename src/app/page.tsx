@@ -79,7 +79,7 @@ export default function Home() {
         const newCalculator = new SingingBowlCalculator(newMetal, parseFloat(thicknessRatio));
         
         // Get all parameters with current frequency
-        var newParams = newCalculator.calculateBowlParameters(parseFloat(selectedOctave));
+        let newParams = newCalculator.calculateBowlParameters(parseFloat(selectedOctave));
         
         // If current frequency isn't available in new metal's octaves,
         // use the normalized frequency of the new metal
