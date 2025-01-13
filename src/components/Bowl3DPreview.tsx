@@ -67,14 +67,12 @@ const Bowl3DPreview: React.FC<Bowl3DPreviewProps> = ({ dimensions, shape }) => {
       const finalScale = scale * (isOuter ? dimensions.outerDiameter : dimensions.innerDiameter);
       
       const steps = 50;
-      for (let i = 0; i <= steps; i++) {
+            for (let i = 0; i <= steps; i++) {
         const t = i / steps;
-        let x, y;
-
         // Only using hemisphere shape for now
         const angle = (t * Math.PI) / 2;
-        x = (Math.sin(angle) * baseRadius) * finalScale;
-        y = (-Math.cos(angle) * depth) * finalScale;
+        const x = (Math.sin(angle) * baseRadius) * finalScale;
+        const y = (-Math.cos(angle) * depth) * finalScale;
 
         /* Parabolic shape code kept for future reference
         else {
