@@ -130,18 +130,36 @@ class SingingBowlCalculator {
     };
   }
 
-  getFrequencyOctaves(baseFreq: number): number[] {
-    const octaves: number[] = [];
-    let freq = baseFreq;
-    
-    // Only go down in octaves from our starting frequency
-    while (freq >= MIN_AUDIBLE_FREQ) {
+getFrequencyOctaves(baseFreq: number): number[] {
+  const octaves: number[] = [];
+  let freq = baseFreq;
+  
+  // Add base frequency
+  octaves.push(freq);
+  
+  // Go down in octaves
+  while (true) {
+    freq /= 2;
+    if (freq >= MIN_AUDIBLE_FREQ) {
       octaves.push(freq);
-      freq /= 2;
+    } else {
+      break;
     }
-    
-    return octaves.sort((a, b) => a - b);
   }
+  
+  // Reset to base and go up in octaves
+  freq = baseFreq;
+  while (true) {
+    freq *= 2;
+    if (freq <= MAX_AUDIBLE_FREQ) {
+      octaves.push(freq);
+    } else {
+      break;
+    }
+  }
+  
+  return octaves.sort((a, b) => a - b);
+}
 
   calculateBowlParameters(selectedOctave?: number): BowlParameters {
     const normalizedFreq = this.normalizeToAudibleFrequency();
